@@ -52,6 +52,12 @@ func main() {
 	fmt.Println(users)
 
 	file, err := os.Create("C:\\Users\\Kafein\\Desktop\\golang\\jsonFile.json")
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+
+		}
+	}(file)
 	if err != nil {
 		fmt.Println(err)
 	}
