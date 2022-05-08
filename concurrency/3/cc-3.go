@@ -20,13 +20,12 @@ func main() {
 		go func() {
 			defer wg.Done()
 			mu.Lock()
+			defer mu.Unlock()
 			temp := counter
-			runtime.Gosched()
 			temp++
 			counter = temp
-			mu.Unlock()
 			fmt.Printf("Number of Goroutines\t%d\n", runtime.NumGoroutine())
-			fmt.Printf("Current value of counter\t%d\n", runtime.NumGoroutine())
+			fmt.Printf("Current value of counter\t%d\n", counter)
 		}()
 	}
 	wg.Wait()
